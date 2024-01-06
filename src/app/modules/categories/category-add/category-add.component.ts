@@ -64,7 +64,7 @@ export class CategoryAddComponent implements OnInit {
 
     this.categoryService.registerCategory(formData).subscribe((resp:any) => {
       console.log(resp);
-      this.CategoryC.emit(resp);
+      this.CategoryC.emit(resp.category);
       this.toaster.open({text: "LA CATEGORÍA SE REGISTRÓ CORRECTAMENTE", caption: "INFORME", type: 'primary'});
       this.modal.close();
     });

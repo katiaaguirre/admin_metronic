@@ -1,0 +1,189 @@
+<div class="d-flex justify-content-center mt-5"><span class="spinner-border spinner-border-sm align-middle ms-2" *ngIf="isLoading | async"></span></div>
+<div class="card" *ngIf="course_selected">
+    <div class="card-header">
+        <div class="card-title fs-3 fw-bolder">Editar curso #{{ course_selected.id }}</div>
+    </div>
+
+    <form id="kt_project_settings_form" class="form fv-plugins-bootstrap5 fv-plugins-framework" novalidate="novalidate">
+        <div class="card-body p-9">
+            <div class="row mb-8">
+               <div class="col-5">
+                    <label class="fs-6 fw-bold mt-2 mb-3">Título del curso:</label>
+                    <input type="text" class="form-control form-control-solid" name="title" [(ngModel)]="title" placeholder="Desarrollo web">
+               </div>
+
+               <div class="col-7">
+                    <label class="fs-6 fw-bold mt-2 mb-3">Subtítulo del curso:</label>
+                    <input type="text" class="form-control form-control-solid" name="subtitle" [(ngModel)]="subtitle" placeholder="Nociones básicas del desarrollo web">
+               </div>
+            </div>
+
+            <div class="row mb-8">
+                <div class="col-2">
+                     <label class="fs-6 fw-bold mt-2 mb-3">Precio en PESOS:</label>
+                     <input type="number" class="form-select form-control-solid" name="precio_mxn" [(ngModel)]="precio_mxn" placeholder="300">
+                </div>
+ 
+                <div class="col-2">
+                     <label class="fs-6 fw-bold mt-2 mb-3">Precio en DÓLARES:</label>
+                     <input type="number" class="form-select form-control-solid" name="precio_usd" [(ngModel)]="precio_usd" placeholder="15">
+                </div>
+
+                <div class="col-4">
+                    <label class="fs-6 fw-bold mt-2 mb-3">Selec. Categoría:</label>
+                    <select name="category" class="form-select form-select-solid fw-bolder"
+                    placeholder="Selec. Categoría" (change)="selectCategory($event)" [(ngModel)]="category_id">
+                    <ng-container *ngFor="let category of categories">
+                        <option [value]="category.id">{{category.name}}</option>
+                    </ng-container>
+                    </select>
+                </div>
+
+                <div class="col-4">
+                    <label class="fs-6 fw-bold mt-2 mb-3">Selec. Subcategoría:</label>
+                    <select name="subcategoria" class="form-select form-select-solid fw-bolder"
+                    placeholder="Selec. Subcategoría" [(ngModel)]="sub_category_id">
+                    <ng-container *ngFor="let subcategory of subcategories_back">
+                        <option [value]="subcategory.id">{{subcategory.name}}</option>
+                    </ng-container>
+                    </select>
+                </div>
+             </div>
+
+             <div class="row mb-8">
+                <div class="col-5">
+                    <label class="form-label">Sube tu portada: *</label>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="customFile"  accept=".jpeg, .bmp, .jpg, .png, .gif, .webp"  (change)="processFile($event)">
+                        <label class="custom-file-label" for="customFile">Choose file</label>
+                    </div>
+                    <div class="py-3" *ngIf="image_preview">
+                        <img [src]="image_preview" width="250" alt="">
+                    </div>
+                </div>
+
+                <div class="col-2">
+                    <label class="fs-6 fw-bold mt-2 mb-3">Nivel:</label>
+                    <select name="nivel" class="form-select form-select-solid fw-bolder"
+                    placeholder="Selec. Nivel" [(ngModel)]="level">
+                        <option value="Básico">Básico</option>
+                        <option value="Intermedio">Intermedio</option>
+                        <option value="Avanzado">Avanzado</option>
+                    </select>
+                </div>
+
+                <div class="col-2">
+                    <label class="fs-6 fw-bold mt-2 mb-3">Idioma:</label>
+                    <select name="idioma" class="form-select form-select-solid fw-bolder"
+                    placeholder="Selec. Idioma" [(ngModel)]="idioma">
+                        <option value="Español">Español</option>
+                        <option value="Inglés">Inglés</option>
+                        <option value="Francés">Francés</option>
+                        <option value="Portugés">Portugés</option>
+                    </select>
+                </div>
+                <div class="col-3">
+                    <label class="fs-6 fw-bold mt-2 mb-3">Instructor:</label>
+                    <select name="user" class="form-select form-select-solid fw-bolder"
+                    placeholder="Selec. Instructor" [(ngModel)]="user_id">
+                        <ng-container *ngFor="let instructor of instructores">
+                            <option [value]="instructor.id">{{instructor.full_name}}</option>
+                        </ng-container>
+                    </select>
+                </div>
+             </div>
+
+            <div class="row mb-8">
+                <div class="col-xl-3">
+                    <div class="fs-6 fw-bold mt-2 mb-3">Descripción:</div>
+                </div>
+                <div class="col-xl-9 fv-row fv-plugins-icon-container">
+                    <ckeditor [data]="description" (change)="onChange($event)"></ckeditor>
+                </div>
+            </div>
+
+            <div class="row mb-8">
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="fs-6 fw-bold mt-2 mb-3">Requerimientos:</div>
+                            <div class="d-flex">
+                                <input type="text" class="form-control form-control-solid" (keyup.enter)="addRequirements()" [(ngModel)]="text_requirements" name="requerimiento" placeholder="Angular básico">
+                                <button class="btn btn-sm btn-primary mx-4" (click)="addRequirements()">+</button>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="table-responsive">
+                                <table class="table align-middle gs-0 gy-3">
+                                    <thead>
+                                        <tr>
+                                            <th class="p-0"></th>
+                                            <th class="p-0"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let requirement of requirements; let i=index">
+                                            <td>
+                                                <a href="#" onclick="return false;" class="text-dark fw-bolder text-hover-primary mb-1 fs-6">{{requirement}}</a>
+                                            </td>
+                                            <td class="text-end text-muted fw-bold">
+                                                <button class="btn btn-sm btn-danger" (click)="removeRequirement(i)">x</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="fs-6 fw-bold mt-2 mb-3">¿Para quien está dirigido?:</div>
+                            <div class="d-flex">
+                                <input type="text" class="form-control form-control-solid" (keyup.enter)="addWhoIsItFor()" [(ngModel)]="text_who_is_it_for" name="who_is_it_for" placeholder="Desarrolladores web">
+                                <button class="btn btn-sm btn-primary mx-4" (click)="addWhoIsItFor()">+</button>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="table-responsive">
+                                <table class="table align-middle gs-0 gy-3">
+                                    <thead>
+                                        <tr>
+                                            <th class="p-0"></th>
+                                            <th class="p-0"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let who of who_is_it_for; let i=index">
+                                            <td>
+                                                <a href="#" onclick="return false;" class="text-dark fw-bolder text-hover-primary mb-1 fs-6">{{who}}</a>
+                                            </td>
+                                            <td class="text-end text-muted fw-bold">
+                                                <button class="btn btn-sm btn-danger" (click)="removeWhoIsItFor(i)">x</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-8">
+                <div class="col-3">
+                    <select class="form-control" name="status" placeholder="Filtrar por Estado" [(ngModel)]="state">
+                    <option value="1">PRUEBA</option>
+                    <option value="2">PÚBLICO</option></select
+                >
+                </div>
+            </div>
+
+        </div>
+        <div class="card-footer d-flex justify-content-end py-6 px-9">
+            <button type="button" (click)="save()" class="btn btn-primary" id="kt_project_settings_submit">GUARDAR CAMBIOS</button>
+        </div>
+    <input type="hidden"><div></div></form>
+</div>

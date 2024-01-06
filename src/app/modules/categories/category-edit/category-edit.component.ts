@@ -50,7 +50,7 @@ export class CategoryEditComponent implements OnInit {
 
   store(){
     if(this.selected_option == 1){
-      if(!this.name || !this.file_portada){
+      if(!this.name){
         this.toaster.open({text: "NECESITAS LLENAR TODOS LOS CAMPOS", caption: 'VALIDACIÓN', type: "danger"});
         return;
       }
@@ -75,7 +75,7 @@ export class CategoryEditComponent implements OnInit {
     formData.append("state", this.state);
     this.categoryService.updateCategory(formData,this.category.id).subscribe((resp:any) => {
       console.log(resp);
-      this.CategoryE.emit(resp);
+      this.CategoryE.emit(resp.category);
       this.toaster.open({text: "LA CATEGORIA SE ACTULIZÓ CORRECTAMENTE", caption: "INFORME", type: 'primary'});
       this.modal.close();
     });
