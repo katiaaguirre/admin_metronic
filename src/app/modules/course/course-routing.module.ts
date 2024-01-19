@@ -15,17 +15,17 @@ const routes: Routes = [{
       component: CourseAddComponent
     },
     {
-      path: 'editar/:id',
-      component: CourseEditComponent
-    },
-    {
       path: 'eliminar',
       component: CourseDeleteComponent
     },
     {
       path: 'list',
       component: CourseListComponent
-    }
+    },
+    {
+      path: 'list/editar/:id',
+      component: CourseEditComponent
+    },
   ]
 }];
 

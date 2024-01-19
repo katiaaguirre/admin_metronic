@@ -31,10 +31,11 @@ export class CourseEditComponent implements OnInit {
   user_id:any = null;
   level:any = null;
   idioma:any = null;
-  
+  state:any = 1;
+
   course_id:any;
   course_selected:any = null;
-  state:any = 1;
+  trailer_curso:any = null;
 
   constructor(public courseService: CourseService, public toaster: Toaster,
     public activatedRoute: ActivatedRoute) { }
@@ -152,6 +153,24 @@ export class CourseEditComponent implements OnInit {
         return;
       }
     });
+  }
+
+  uploadVideo(){
+    let formData = new FormData();
+    formData.append("video", this.trailer_curso);
+    console.log(this.trailer_curso);
+
+    this.courseService.uploadVideo(formData).subscribe((resp:any) => {
+      console.log(resp);
+    });
+  }
+
+  processVideo($event:any){
+    if($event.target.files[0].type.indexOf("video") < 0){
+      this.toaster.open({text: 'SOLAMENTE SE ACEPTAN VIDEOS', caption: 'MENSAJE DE VALIDACIÓN', type: 'danger'});
+      return
+    }
+    this.trailer_curso = $event.target.files[0];
   }
 
   processFile($event:any){
