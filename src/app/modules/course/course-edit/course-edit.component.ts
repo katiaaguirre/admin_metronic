@@ -32,6 +32,8 @@ export class CourseEditComponent implements OnInit {
   level:any = null;
   idioma:any = null;
   state:any = 1;
+  url_video:any = null;
+  time:any = null;
 
   course_id:any;
   course_selected:any = null;
@@ -52,6 +54,7 @@ export class CourseEditComponent implements OnInit {
 
     this.activatedRoute.params.subscribe((resp:any) => {
       this.course_id = resp.id;
+      this.showCourse(this.course_id);
     });
   }
 
@@ -74,6 +77,7 @@ export class CourseEditComponent implements OnInit {
       this.who_is_it_for = this.course_selected.who_is_it_for;
       this.image_preview = this.course_selected.image;
       this.state = this.course_selected.state;
+      this.url_video = this.course_selected.url_video;
     });
   }
 
@@ -133,10 +137,12 @@ export class CourseEditComponent implements OnInit {
     formData.append("category_id", this.category_id);
     formData.append("sub_category_id", this.sub_category_id);
     formData.append("description", this.description);
+    formData.append("url_video", this.url_video);
     formData.append("level", this.level);
     formData.append("idioma", this.idioma);
     formData.append("user_id", this.user_id);
     formData.append("state", this.state)
+    formData.append("time", this.time)
     if(this.file_portada){
       formData.append("portada", this.file_portada);
     }
@@ -153,24 +159,6 @@ export class CourseEditComponent implements OnInit {
         return;
       }
     });
-  }
-
-  uploadVideo(){
-    let formData = new FormData();
-    formData.append("video", this.trailer_curso);
-    console.log(this.trailer_curso);
-
-    this.courseService.uploadVideo(formData).subscribe((resp:any) => {
-      console.log(resp);
-    });
-  }
-
-  processVideo($event:any){
-    if($event.target.files[0].type.indexOf("video") < 0){
-      this.toaster.open({text: 'SOLAMENTE SE ACEPTAN VIDEOS', caption: 'MENSAJE DE VALIDACIÓN', type: 'danger'});
-      return
-    }
-    this.trailer_curso = $event.target.files[0];
   }
 
   processFile($event:any){

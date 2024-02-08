@@ -94,16 +94,13 @@
              </div>
 
              <div class="row mb-8">
-                <div class="col-5">
-                    <label class="form-label">Sube el trailer del curso: *</label>
-                    <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="customFile" accept=".mp4" (change)="processVideo($event)">
-
-                        <label class="custom-file-label" for="customFile">Choose video</label>
-                    </div>
+                <div class="col-9">
+                    <label class="fs-6 fw-bold mt-2 mb-3">Link del Trailer del curso:</label>
+                    <input type="text" class="form-control form-control-solid" name="url_video" [(ngModel)]="url_video" placeholder="Link de Bunny.net">
                 </div>
-                <div class="col-5">
-                    <button class="btn btn-sm btn-primary" (click)="uploadVideo()">+</button>
+                <div class="col-3">
+                    <label class="fs-6 fw-bold mt-2 mb-3">Duración:</label>
+                    <input type="text" class="form-control form-control-solid" name="time" [(ngModel)]="time" placeholder="Tiempo de duración">
                 </div>
              </div>
 

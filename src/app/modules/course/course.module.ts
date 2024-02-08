@@ -12,6 +12,13 @@ import { NgbModalModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InlineSVGModule } from 'ng-inline-svg-2';
 import { CKEditorModule } from 'ckeditor4-angular';
+import { SectionAddComponent } from './section/section-add/section-add.component';
+import { SectionEditComponent } from './section/section-edit/section-edit.component';
+import { SectionDeleteComponent } from './section/section-delete/section-delete.component';
+import { ClaseAddComponent } from './section/clases/clase-add/clase-add.component';
+import { ClaseEditComponent } from './section/clases/clase-edit/clase-edit.component';
+import { ClaseDeleteComponent } from './section/clases/clase-delete/clase-delete.component';
+import { ClaseFileDeleteComponent } from './section/clases/clase-file-delete/clase-file-delete.component';
 
 
 @NgModule({
@@ -20,7 +27,14 @@ import { CKEditorModule } from 'ckeditor4-angular';
     CourseAddComponent,
     CourseEditComponent,
     CourseDeleteComponent,
-    CourseListComponent
+    CourseListComponent,
+    SectionAddComponent,
+    SectionEditComponent,
+    SectionDeleteComponent,
+    ClaseAddComponent,
+    ClaseEditComponent,
+    ClaseDeleteComponent,
+    ClaseFileDeleteComponent
   ],
   imports: [
     CommonModule,

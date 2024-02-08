@@ -73,7 +73,6 @@ export class CourseAddComponent implements OnInit {
     this.subcategories_back = this.subcategories.filter((item:any) => item.categorie_id == VALUE);
   }
  
-  
   removeRequirement(index:number){
     this.requirements.splice(index,1);
   }
