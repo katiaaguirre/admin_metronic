@@ -36,8 +36,8 @@
                     </div>
                </div>
                <div class="col-3">
-                <label class="fs-6 fw-bold mt-2 mb-3">Subtítulo del curso:</label>
-                <input type="text" class="form-control form-control-solid" name="num_use" [(ngModel)]="num_use" placeholder="Nociones básicas del desarrollo web">
+                <label class="fs-6 fw-bold mt-2 mb-3">Descuento:</label>
+                <input type="number" class="form-control form-control-solid" name="discount" [(ngModel)]="discount" placeholder="">
                </div>
             </div>
             <div class="row mb-8 align-items-center">
@@ -66,7 +66,7 @@
                         </div>
                    </div>
                    <div class="col-3" *ngIf="type_count == 2">
-                    <input type="text" class="form-control form-control-solid" name="discount" [(ngModel)]="discount" placeholder="Nociones básicas del desarrollo web">
+                    <input type="number" class="form-control form-control-solid" name="num_use" [(ngModel)]="num_use" placeholder="">
                    </div>
             </div>
 
@@ -100,23 +100,27 @@
                    </div>
                 <div class="col-4" *ngIf="type_coupon == 1">
                     <label class="fs-6 fw-bold mt-2 mb-3">Selec. Curso:</label>
-                    <select name="course" class="form-select form-select-solid fw-bolder"
-                    placeholder="Selec. Curso" [(ngModel)]="course_id">
-                        <ng-container *ngFor="let course of courses">
-                            <option [value]="course.id">{{course.title}}</option>
-                        </ng-container>
-                    </select>
-                    <button class="btn btn-sm btn-primary" (click)="addCourseSelected()">+</button>
+                    <div class="d-flex">
+                        <select name="course" class="form-select form-select-solid fw-bolder"
+                        placeholder="Selec. Curso" [(ngModel)]="course_id">
+                            <ng-container *ngFor="let course of courses">
+                                <option [value]="course.id">{{course.title}}</option>
+                            </ng-container>
+                        </select>
+                        <button class="btn btn-sm btn-primary" (click)="addCourseSelected()">+</button>
+                    </div>
                 </div>
                 <div class="col-4" *ngIf="type_coupon == 2">
                     <label class="fs-6 fw-bold mt-2 mb-3">Selec. Categoría:</label>
-                    <select name="category" class="form-select form-select-solid fw-bolder"
-                    placeholder="Selec. Categoría" [(ngModel)]="category_id">
-                        <ng-container *ngFor="let category of categories">
-                            <option [value]="category.id">{{category.name}}</option>
-                        </ng-container>
-                    </select>
-                    <button class="btn btn-sm btn-primary" (click)="addCategorySelected()">+</button>
+                    <div class="d-flex">
+                        <select name="category" class="form-select form-select-solid fw-bolder"
+                        placeholder="Selec. Categoría" [(ngModel)]="category_id">
+                            <ng-container *ngFor="let category of categories">
+                                <option [value]="category.id">{{category.name}}</option>
+                            </ng-container>
+                        </select>
+                        <button class="btn btn-sm btn-primary" (click)="addCategorySelected()">+</button>
+                    </div>
                 </div>
                 <div class="col-5" *ngIf="type_coupon == 1">
                     <div class="table-responsive">
@@ -128,7 +132,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let scourse of course_selected">
+                                <tr *ngFor="let scourse of course_selected; let i=index">
                                     <td>
                                         <div class="d-flex align-items-center">
                                             <div class="symbol symbol-45px me-5">
@@ -141,7 +145,7 @@
                                     </td>
                                     <td>
                                         <div class="d-flex justify-content-end flex-shrink-0">
-                                            <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
+                                            <a href="#" onclick="return false;" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm" (click)="removeCourse(i)">
                                                 <span class="svg-icon svg-icon-3">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                                         <path d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z" fill="currentColor"></path>
@@ -167,7 +171,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let scategory of category_selected">
+                                <tr *ngFor="let scategory of category_selected; let i=index">
                                     <td>
                                         <div class="d-flex align-items-center">
                                             <div class="symbol symbol-45px me-5">
@@ -180,7 +184,7 @@
                                     </td>
                                     <td>
                                         <div class="d-flex justify-content-end flex-shrink-0">
-                                            <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
+                                            <a href="#" onclick="return false;" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm" (click)="removeCategory(i)">
                                                 <span class="svg-icon svg-icon-3">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                                         <path d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z" fill="currentColor"></path>
@@ -199,7 +203,7 @@
             </div>
         </div>
         <div class="card-footer d-flex justify-content-end py-6 px-9">
-            <button type="button" (click)="save()" class="btn btn-primary" id="kt_project_settings_submit">GUARDAR CURSO</button>
+            <button type="button" (click)="save()" class="btn btn-primary" id="kt_project_settings_submit">GUARDAR CUPÓN</button>
         </div>
     <input type="hidden"><div></div></form>
 </div>

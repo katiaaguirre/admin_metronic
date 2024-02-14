@@ -44,7 +44,10 @@ export class ClaseEditComponent implements OnInit {
       time: this.time,
       state: this.state
     }
-
+    if(!this.description){
+      this.toaster.open({text: "NO PUEDES DEJAR LA CLASE SIN DESCRIPCIÓN", caption: "VALIDACIÓN", type: "danger"});
+      return;
+    }
     this.courseService.updateClase(data, this.clase_selected.id).subscribe((resp:any) => {
       this.toaster.open({text: "SE HAN REGISTRADO LOS CAMBIOS DE LA CLASE", caption: "SUCCESS", type: "success"});
       this.modal.close();

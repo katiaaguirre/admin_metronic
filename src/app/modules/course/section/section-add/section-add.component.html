@@ -11,7 +11,7 @@
                     <div class="row mb-8">
                        <div class="col-12">
                             <label class="fs-6 fw-bold mt-2 mb-3">Nombre de la sección:</label>
-                            <input type="text" class="form-control form-control-solid" name="title" [(ngModel)]="title" placeholder="Introducción, Modulo Curso">
+                            <input type="text" class="form-control form-control-solid" name="title" [(ngModel)]="title" placeholder="Introducción, Modulo Curso" (keyup.enter)="save()">
                        </div>
                     </div>
         </div>

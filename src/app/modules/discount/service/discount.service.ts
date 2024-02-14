@@ -1,14 +1,15 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject, finalize } from 'rxjs';
-import { AuthService } from '../../auth';
 import { URL_SERVICIOS } from 'src/app/config/config';
+import { AuthService } from '../../auth';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CouponService {
+export class DiscountService {
 
+  
   isLoading$: Observable<boolean>;
   isLoadingSubject: BehaviorSubject<boolean>;
   
@@ -20,7 +21,7 @@ export class CouponService {
     this.isLoading$ = this.isLoadingSubject.asObservable();
   }
 
-  listCoupons(search:any, state:any){
+  listDiscounts(search:any, state:any){
     this.isLoadingSubject.next(true);
     let headers = new HttpHeaders({'Authorization': 'Bearer '+this.authservice.token});
     let LINK = "?T=";
@@ -30,7 +31,7 @@ export class CouponService {
     if(state){
       LINK += "&state="+state;
     }
-    let URL = URL_SERVICIOS+"/coupon"+LINK;
+    let URL = URL_SERVICIOS+"/discount"+LINK;
     return this.http.get(URL,{headers: headers}).pipe(
       finalize(() => this.isLoadingSubject.next(false))
     );
@@ -45,39 +46,39 @@ export class CouponService {
     );
   }
 
-  showCoupon(coupon_id:any){
+  showDiscount(discount_id:any){
     let headers = new HttpHeaders({'Authorization': 'Bearer '+this.authservice.token});
-    let URL = URL_SERVICIOS+"/coupon/"+coupon_id;
+    let URL = URL_SERVICIOS+"/discount/"+discount_id;
     this.isLoadingSubject.next(true);
     return this.http.get(URL,{headers: headers}).pipe(
       finalize(() => this.isLoadingSubject.next(false))
     );
   }
 
-  registerCoupon(data:any){
+  registerDiscount(data:any){
     this.isLoadingSubject.next(true);
     let headers = new HttpHeaders({'Authorization': 'Bearer '+this.authservice.token});
-    let URL = URL_SERVICIOS+"/coupon";
+    let URL = URL_SERVICIOS+"/discount";
     return this.http.post(URL, data, {headers: headers}).pipe(
       finalize(() => this.isLoadingSubject.next(false))
     );
   }
 
-  updateCoupon(data:any, coupon_id:string){
+  updateDiscount(data:any, discount_id:string){
     this.isLoadingSubject.next(true);
     let headers = new HttpHeaders({'Authorization': 'Bearer '+this.authservice.token});
-    let URL = URL_SERVICIOS+"/coupon/"+coupon_id;
+    let URL = URL_SERVICIOS+"/discount/"+discount_id;
     return this.http.put(URL, data, {headers: headers}).pipe(
       finalize(() => this.isLoadingSubject.next(false))
     );
   }
 
-  deleteCoupon(coupon_id:any){
+  deleteDiscount(discount_id:any){
     this.isLoadingSubject.next(true);
     let headers = new HttpHeaders({'Authorization': 'Bearer '+this.authservice.token});
-    let URL = URL_SERVICIOS+"/coupon/"+coupon_id;
+    let URL = URL_SERVICIOS+"/discount/"+discount_id;
     return this.http.delete(URL, {headers: headers}).pipe(
       finalize(() => this.isLoadingSubject.next(false))
     );
   }
-}  
+}

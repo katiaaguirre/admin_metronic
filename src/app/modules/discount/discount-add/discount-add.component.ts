@@ -1,20 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { CouponService } from '../service/coupon.service';
+import { DiscountService } from '../service/discount.service';
 import { Toaster } from 'ngx-toast-notifications';
 
 @Component({
-  selector: 'app-coupon-add',
-  templateUrl: './coupon-add.component.html',
-  styleUrls: ['./coupon-add.component.scss']
+  selector: 'app-discount-add',
+  templateUrl: './discount-add.component.html',
+  styleUrls: ['./discount-add.component.scss']
 })
-export class CouponAddComponent implements OnInit {
-  code:any;
+export class DiscountAddComponent implements OnInit {
   discount:number = 0;
-  num_use:any = null;
   type_discount:number = 1;
-  type_count:number = 1;
-  type_coupon:number = 1;
-  
+  discount_type:number = 1;
+  start_date:any = null;
+  end_date:any = null;
+  type_campaign:number = 1; //1 es campaña normal, 2 es flash y 3 es banner
+
   course_id:any = null;
   category_id:any = null;
   isLoading:any;
@@ -23,11 +23,11 @@ export class CouponAddComponent implements OnInit {
   categories:any = [];
   category_selected:any = [];
   course_selected:any = [];
-  constructor(public couponService:CouponService, public toaster:Toaster) {}
+  constructor(public discountService:DiscountService, public toaster:Toaster) {}
 
   ngOnInit(): void {
-    this.isLoading = this.couponService.isLoading$;
-    this.couponService.listConfig().subscribe((resp:any) => {
+    this.isLoading = this.discountService.isLoading$;
+    this.discountService.listConfig().subscribe((resp:any) => {
       console.log(resp);
       this.courses = resp.courses;
       this.categories = resp.categories;
@@ -35,49 +35,42 @@ export class CouponAddComponent implements OnInit {
   }
 
   save(){
-    if(!this.code || !this.discount){
-      this.toaster.open({text: "NECESITAS INGRESAR TODOS LOS CAMPOS", caption: "VALIDACIÓN", type: "danger"});
-      return;
-    }
-    if(this.type_count == 2 && !this.num_use){
-      this.toaster.open({text: "NECESITAS INGRESAR UN NÚMERO DE USOS LIMITADOS", caption: "VALIDACIÓN", type: "danger"})
-      return;
-    }
-    if(this.type_coupon == 1 && this.course_selected.length == 0){
+    if(!this.discount || !this.start_date || !this.end_date)
+    if(this.discount_type == 1 && this.course_selected.length == 0){
       this.toaster.open({text: "NECESITAS SELECCIONAR CURSOS", caption: "VALIDACIÓN", type: "danger"})
       return;
     }
-    if(this.type_coupon == 2 && this.category_selected.length == 0){
+    if(this.discount_type == 2 && this.category_selected.length == 0){
       this.toaster.open({text: "NECESITAS SELECCIONAR CATEGORÍAS", caption: "VALIDACIÓN", type: "danger"})
       return;
     }
     let data = {
-      code: this.code,
       discount: this.discount,
       type_discount: this.type_discount,
-      type_count: this.type_count,
-      num_use: this.num_use,
-      type_coupon: this.type_coupon,
+      type_campaign: this.type_campaign,
+      discount_type: this.discount_type,
+      start_date: this.start_date,
+      end_date: this.end_date,
       course_selected: this.course_selected,
       category_selected: this.category_selected
     }
     console.log(data);
-    this.couponService.registerCoupon(data).subscribe((resp:any) => {
+    this.discountService.registerDiscount(data).subscribe((resp:any) => {
       console.log(resp);
       if(resp.message == 403){
         this.toaster.open({text: resp.message_text, caption: "VALIDACIÓN", type: "danger"})
         return;
       }else{
-        this.toaster.open({text: "EL CUPÓN HA SIDO REGISTRADO CORRECTAMENTE", caption: "VALIDACIÓN", type: "success"});
-        this.code = null;
+        this.toaster.open({text: "LA CAMPAÑA DE DESCUENTO HA SIDO REGISTRADA CORRECTAMENTE", caption: "VALIDACIÓN", type: "success"});
         this.discount = 0;
-        this.num_use = null;
         this.type_discount = 1;
-        this.type_count = 1;
-        this.type_coupon = 1;
+        this.type_campaign = 1;
         this.course_selected = [];
         this.category_selected = [];
         this.course_id = null;
+        this.type_campaign = 1;
+        this.start_date = null;
+        this.end_date = null;
       }
     });
   }
@@ -117,12 +110,14 @@ export class CouponAddComponent implements OnInit {
     this.type_discount = value;
   }
 
-  selectedTypeCount(value:any){
-    this.type_count = value;
+  selectedTypeCampaign(value:any){
+    this.selectedTypeCoupon(1);
+    this.type_campaign = value;
   }
 
   selectedTypeCoupon(value:any){
-    this.type_coupon = value;
+    this.discount_type = value;
+    this.course_selected = [];
+    this.category_selected = [];
   }
-
 }

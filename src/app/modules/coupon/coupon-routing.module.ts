@@ -16,7 +16,7 @@ const routes: Routes = [
         component: CouponAddComponent
       },
       {
-        path: 'editar/:id',
+        path: 'list/editar/:id',
         component: CouponEditComponent
       },
       {
