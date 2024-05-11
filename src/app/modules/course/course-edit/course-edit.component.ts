@@ -105,7 +105,6 @@ export class CourseEditComponent implements OnInit {
     this.text_who_is_it_for = null;
   }
  
-  
   removeRequirement(index:number){
     this.requirements.splice(index,1);
   }

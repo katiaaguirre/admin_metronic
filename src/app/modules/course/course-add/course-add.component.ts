@@ -67,12 +67,6 @@ export class CourseAddComponent implements OnInit {
     this.text_who_is_it_for = null;
   }
   
-  selectCategorie(event:any){
-    let VALUE = event.target.value;
-    console.log(VALUE);
-    this.subcategories_back = this.subcategories.filter((item:any) => item.categorie_id == VALUE);
-  }
- 
   removeRequirement(index:number){
     this.requirements.splice(index,1);
   }

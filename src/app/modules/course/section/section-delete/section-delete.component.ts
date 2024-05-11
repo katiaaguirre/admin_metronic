@@ -31,7 +31,6 @@ export class SectionDeleteComponent implements OnInit {
         this.SectionD.emit("");
         this.modal.dismiss();
       }
-      
     })
   }
 

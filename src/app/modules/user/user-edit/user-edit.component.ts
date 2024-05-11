@@ -26,6 +26,9 @@ export class UserEditComponent implements OnInit {
   image_preview:any = "./assets/media/avatars/300-6.jpg";
   file_avatar:any = null;
 
+  roles:any = [];
+  role_id:any;
+
   isLoading:any;
   constructor(
     public userService: UserService,
@@ -40,9 +43,15 @@ export class UserEditComponent implements OnInit {
     this.email = this.user.email;
     this.state = this.user.state;
     this.image_preview = this.user.avatar;
-    this.is_instructor = this.user.instructor;
+    this.is_instructor = this.user.is_instructor;
     this.profesion = this.user.profesion;
     this.description = this.user.description;
+    this.userService.roles().subscribe((resp:any) => {
+      console.log(resp)
+      this.roles = resp;
+    })
+    
+    this.role_id = this.user.role.id;
   }
 
   processAvatar($event:any){
@@ -74,6 +83,7 @@ export class UserEditComponent implements OnInit {
     formData.append("surname",this.surname);
     formData.append("email",this.email);
     formData.append("state",this.state);
+    formData.append("role_id", this.role_id);
     if(this.is_instructor){
       formData.append("is_instructor",this.is_instructor ? "1" : "0");
       formData.append("profesion",this.profesion);

@@ -10,6 +10,7 @@ import { UserListComponent } from './user-list/user-list.component';
 import { UserAddComponent } from './user-add/user-add.component';
 import { UserEditComponent } from './user-edit/user-edit.component';
 import { UserDeleteComponent } from './user-delete/user-delete.component';
+import { UserAdminComponent } from './user-admin/user-admin.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { UserDeleteComponent } from './user-delete/user-delete.component';
     UserListComponent,
     UserAddComponent,
     UserEditComponent,
-    UserDeleteComponent
+    UserDeleteComponent,
+    UserAdminComponent
   ],
   imports: [
     CommonModule,

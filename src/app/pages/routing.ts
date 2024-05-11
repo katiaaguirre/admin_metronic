@@ -64,6 +64,11 @@ const Routing: Routes = [
       import('../modules/discount/discount.module').then((m) => m.DiscountModule),
   },
   {
+    path: 'repertorio',
+    loadChildren: () =>
+      import('../modules/repertorio/repertorio.module').then((m) => m.RepertorioModule),
+  },
+  {
     path: '',
     redirectTo: '/dashboard',
     pathMatch: 'full',

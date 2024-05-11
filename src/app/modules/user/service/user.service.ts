@@ -33,6 +33,11 @@ export class UserService {
     );
   }
 
+  roles(){
+    let URL = URL_SERVICIOS+"/roles";
+    return this.http.get(URL);
+  }
+
   register(data:any){
     this.isLoadingSubject.next(true);
     let headers = new HttpHeaders({'Authorization': 'Bearer '+this.authservice.token});
@@ -60,4 +65,70 @@ export class UserService {
     );
   }
   
+  InscribirRepertorio(data:any){
+    this.isLoadingSubject.next(true);
+    let headers = new HttpHeaders({'Authorization': 'Bearer '+this.authservice.token});
+    let URL = URL_SERVICIOS+"/add-to-repertorio";
+    return this.http.post(URL,data,{headers: headers}).pipe(
+      finalize(() => this.isLoadingSubject.next(false))
+    );
+  }
+
+  RemoverDRepertorio(data: any) {
+    this.isLoadingSubject.next(true);
+    let headers = new HttpHeaders({'Authorization': 'Bearer ' + this.authservice.token});
+    let URL = URL_SERVICIOS+"/remove-from-repertorio";
+    return this.http.post(URL, data,{ headers: headers}).pipe(
+      finalize(() => this.isLoadingSubject.next(false))
+    );
+  } 
+
+  InscribirCurso(data:any){
+    this.isLoadingSubject.next(true);
+    let headers = new HttpHeaders({'Authorization': 'Bearer '+this.authservice.token});
+    let URL = URL_SERVICIOS+"/add-to-curso";
+    return this.http.post(URL,data,{headers: headers}).pipe(
+      finalize(() => this.isLoadingSubject.next(false))
+    );
+  }
+
+  RemoverDCurso(data:any){
+    this.isLoadingSubject.next(true);
+    let headers = new HttpHeaders({'Authorization': 'Bearer ' + this.authservice.token});
+    let URL = URL_SERVICIOS+"/remove-from-curso";
+    return this.http.post(URL, data,{ headers: headers}).pipe(
+      finalize(() => this.isLoadingSubject.next(false))
+    );
+  }
+
+  InscribirAmigo(data:any){
+    this.isLoadingSubject.next(true);
+    let headers = new HttpHeaders({'Authorization': 'Bearer '+this.authservice.token});
+    let URL = URL_SERVICIOS+"/add-to-amigo";
+    return this.http.post(URL,data,{headers: headers}).pipe(
+      finalize(() => this.isLoadingSubject.next(false))
+    );
+  }
+
+  RemoverDAmigo(){
+    
+  }
+  
+  CrearRol(data:any){
+    this.isLoadingSubject.next(true);
+    let headers = new HttpHeaders({'Authorization': 'Bearer '+this.authservice.token});
+    let URL = URL_SERVICIOS+"/create-role";
+    return this.http.post(URL,data,{headers: headers}).pipe(
+      finalize(() => this.isLoadingSubject.next(false))
+    );
+  }
+
+  DeleteRol(data:any){
+    this.isLoadingSubject.next(true);
+    let headers = new HttpHeaders({'Authorization': 'Bearer ' + this.authservice.token});
+    let URL = URL_SERVICIOS+"/delete-role";
+    return this.http.post(URL, data,{ headers: headers}).pipe(
+      finalize(() => this.isLoadingSubject.next(false))
+    );
+  }
 }

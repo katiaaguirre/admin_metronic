@@ -156,6 +156,9 @@ export const environment = {
       'thumbnail': './assets/media/demos/demo20.png'
     },
   },
+  URL_BACKEND: 'https://admin.learningmusic.online/',
+  URL_SERVICIOS: 'https://api.learningmusic.online/api',
+  URL_FROTEND: 'https://tienda.learningmusic.online/',
 };
 
 /*

@@ -1,0 +1,293 @@
+<div class="row">
+    <div class="col-xl-6">
+        <div class="card mb-5 mb-xl-8">
+            <div class="card-body pb-0">
+                <div class="d-flex align-items-center mb-5">
+                    <div class="d-flex align-items-center flex-grow-1">
+                        <div class="symbol symbol-45px me-5">
+                            <img src="assets/media/icons/duotune/text/txt001.svg" alt="" />
+                        </div>
+                        <div class="d-flex flex-column">
+                            <span class="text-gray-900 text-hover-primary fs-6 fw-bolder">Concede o Revoca el acceso de un usuario a un Repertorio</span>
+                            <span class="text-gray-400 fw-bold"></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <form>
+                    <div class="row mb-8 mt-5">
+                        <div class="col-9">
+                            <label class="fs-6 fw-bold mt-1 mb-1">Correo electrónico o Id de Usuario: </label>
+                            <input type="text" class="form-control form-control-solid" name="usuario_repertorio" [(ngModel)]="usuario_repertorio" placeholder="johndoe@gmail.com">
+                       </div>
+    
+                       <div class="col-3">
+                        <div class="row">
+                            <div class="col-12 form-check form-check-solid mt-5">
+                                <label class="fs-6 fw-bold">
+                                    <input class="form-check-input" type="radio" name="user_repertoire" [checked]="user_repertoire == 1" (click)="userRep(1)"/>  
+                                    Email
+                                </label>
+                            </div>
+                            
+                            <div class="col-12 form-check form-check-solid mt-3">
+                                <label class="fs-6 fw-bold">
+                                    <input class="form-check-input" type="radio" name="user_repertoire" [checked]="user_repertoire == 2" (click)="userRep(2)"/>  
+                                    Id
+                                </label>
+                            </div>
+                        </div>
+                       </div>
+                    </div>
+                    
+                    <div class="row mb-8 mt-5">
+                        <div class="col-9">
+                            <label class="fs-6 fw-bold mt-1 mb-1">Slug o Id de Repertorio: </label>
+                            <input type="text" class="form-control form-control-solid" name="rep_repertorio" [(ngModel)]="rep_repertorio" placeholder="curso-de-guitarron">
+                       </div>
+    
+                       <div class="col-3">
+                        <div class="row">
+                            <div class="col-12 form-check form-check-solid mt-5">
+                                <label class="fs-6 fw-bold">
+                                    <input class="form-check-input" type="radio" value="1"  name="rep_repertoire" [checked]="rep_repertoire == 1" (click)="repRep(1)"/>  
+                                    Slug
+                                </label>
+                            </div>
+                            
+                            <div class="col-12 form-check form-check-solid mt-3">
+                                <label class="fs-6 fw-bold">
+                                    <input class="form-check-input" type="radio" value="2"  name="rep_repertoire" [checked]="rep_repertoire == 2" (click)="repRep(2)"/>  
+                                    Id
+                                </label>
+                            </div>
+                        </div>
+                       </div>
+                    </div>
+
+                    <div class="row mb-8 mt-5">
+                        <div class="col-3">
+                            1 = Armonías <br>
+                            2 = Cuerdas <br>
+                            3 = Metales <br>
+                            4 = Bajo <br>
+                        </div>
+                        <div class="col-9">
+                            <label class="fs-6 fw-bold mt-1 mb-1">Instrumento(s): </label>
+                            <input type="text" class="form-control form-control-solid" name="instrumento_repertorio" [(ngModel)]="instrumento_repertorio" placeholder="1,4">
+                       </div>
+                    </div>
+                       
+                    <div class="row mb-5">
+                        <div class="col-6 d-grid gap-2">
+                            <button type="button" (click)="AddToRepertorio()" class="btn btn-primary" data-kt-users-modal-action="submit">Inscribir</button>
+                        </div>
+                        <div class="col-6 d-grid gap-2">
+                            <button type="button" (click)="RemoveFromRepertorio()" class="btn btn-danger" data-kt-users-modal-action="submit">Revocar acceso</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-6">
+        <div class="card mb-5 mb-xl-8">
+            <div class="card-body pb-0">
+                <div class="d-flex align-items-center mb-5">
+                    <div class="d-flex align-items-center flex-grow-1">
+                        <div class="symbol symbol-45px me-5">
+                            <img src="assets/media/icons/duotune/electronics/elc004.svg" alt="" />
+                        </div>
+                        <div class="d-flex flex-column">
+                            <span class="text-gray-900 text-hover-primary fs-6 fw-bolder">Inscribe o Revoca acceso de un usuario a un Curso</span>
+                            <span class="text-gray-400 fw-bold"></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <form>
+                    <div class="row mb-8 mt-5">
+                        <div class="col-9">
+                            <label class="fs-6 fw-bold mt-1 mb-1">Correo electrónico o Id de Usuario: </label>
+                            <input type="text" class="form-control form-control-solid" name="usuario_curso" [(ngModel)]="usuario_curso" placeholder="johndoe@gmail.com">
+                       </div>
+    
+                       <div class="col-3">
+                        <div class="row">
+                            <div class="col-12 form-check form-check-solid mt-5">
+                                <label class="fs-6 fw-bold">
+                                    <input class="form-check-input" type="radio" value="1"  name="user_course" [checked]="user_course == 1" (click)="userCour(1)"/>  
+                                    Email
+                                </label>
+                            </div>
+                            
+                            <div class="col-12 form-check form-check-solid mt-3">
+                                <label class="fs-6 fw-bold">
+                                    <input class="form-check-input" type="radio" value="2"  name="user_course" [checked]="user_course == 2" (click)="userCour(2)"/>  
+                                    Id
+                                </label>
+                            </div>
+                        </div>
+                       </div>
+                    </div>
+                    
+                    <div class="row mb-8 mt-5">
+                        <div class="col-9">
+                            <label class="fs-6 fw-bold mt-1 mb-1">Slug o Id de Curso: </label>
+                            <input type="text" class="form-control form-control-solid" name="cur_curso" [(ngModel)]="cur_curso" placeholder="curso-de-guitarron">
+                       </div>
+    
+                       <div class="col-3">
+                        <div class="row">
+                            <div class="col-12 form-check form-check-solid mt-5">
+                                <label class="fs-6 fw-bold">
+                                    <input class="form-check-input" type="radio" value="1"  name="cour_course" [checked]="cour_course == 1" (click)="CourCour(1)"/>  
+                                    Slug
+                                </label>
+                            </div>
+                            
+                            <div class="col-12 form-check form-check-solid mt-3">
+                                <label class="fs-6 fw-bold">
+                                    <input class="form-check-input" type="radio" value="2"  name="cour_course" [checked]="cour_course == 2" (click)="CourCour(2)"/>  
+                                    Id
+                                </label>
+                            </div>
+                        </div>
+                       </div>
+                    </div>
+                       
+                    <div class="row mb-5">
+                        <div class="col-6 d-grid gap-2">
+                            <button type="button" (click)="AddToCurso()" class="btn btn-primary" data-kt-users-modal-action="submit">Inscribir</button>
+                        </div>
+                        <div class="col-6 d-grid gap-2">
+                            <button type="button" (click)="RemoveFromCurso()" class="btn btn-danger" data-kt-users-modal-action="submit">Revocar acceso</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12">
+        <div class='separator separator-dashed my-5'></div>
+    </div>
+
+    <div class="col-xl-6">
+        <div class="card mb-5 mb-xl-8">
+            <div class="card-body pb-0">
+                <div class="d-flex align-items-center mb-5">
+                    <div class="d-flex align-items-center flex-grow-1">
+                        <div class="symbol symbol-45px me-5">
+                            <img src="assets/media/icons/duotune/text/txt001.svg" alt="" />
+                        </div>
+                        <div class="d-flex flex-column">
+                            <span class="text-gray-900 text-hover-primary fs-6 fw-bolder">Crea un rol</span>
+                            <span class="text-gray-400 fw-bold"></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <form>
+                    <div class="row mb-8 mt-5">
+                        <div class="col-9">
+                            <label class="fs-6 fw-bold mt-1 mb-1">Nombre del rol: </label>
+                            <input type="text" class="form-control form-control-solid" name="rol" [(ngModel)]="rol" placeholder="SEO">
+                       </div>
+    
+                       <div class="col-3">
+                        <div class="row">
+                                <div class="col-12">
+                                    <label class="fs-6 fw-bold mt-1 mb-1">ID: </label>
+                                    <input type="text" class="form-control form-control-solid" name="role_id" [(ngModel)]="role_id" placeholder="1">
+                                </div>
+                        </div>
+                       </div>
+
+                       <div class="col-12 mt-5">
+                        <label class="fs-6 fw-bold mt-1 mb-1">Subitulo del rol: </label>
+                        <input type="text" class="form-control form-control-solid" name="role_subtitle" [(ngModel)]="role_subtitle" placeholder="Parte del equipo de Searching Engines Optimization">
+                       </div>
+                    </div>
+                       
+                    <div class="row mb-5">
+                        <div class="col-6 d-grid gap-2">
+                            <button type="button" (click)="CreateRole()" class="btn btn-primary" data-kt-users-modal-action="submit">Crear</button>
+                        </div>
+                        <div class="col-6 d-grid gap-2">
+                            <button type="button" (click)="DeleteRole()" class="btn btn-danger" data-kt-users-modal-action="submit">Eliminar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-6">
+        <div class="card mb-5 mb-xl-8">
+            <div class="card-body pb-0">
+                <div class="d-flex align-items-center mb-5">
+                    <div class="d-flex align-items-center flex-grow-1">
+                        <div class="symbol symbol-45px me-5">
+                            <img src="assets/media/icons/duotune/text/txt001.svg" alt="" />
+                        </div>
+                        <div class="d-flex flex-column">
+                            <span class="text-gray-900 text-hover-primary fs-6 fw-bolder">Hacer un usuario parte del Mariachi Amigo</span>
+                            <span class="text-gray-400 fw-bold"></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <form>
+                    <div class="row mb-8 mt-5">
+                        <div class="col-9">
+                            <label class="fs-6 fw-bold mt-1 mb-1">Correo electrónico o Id de Usuario: </label>
+                            <input type="text" class="form-control form-control-solid" name="usuario_mariachi_amigo" [(ngModel)]="usuario_mariachi_amigo" placeholder="johndoe@gmail.com">
+                       </div>
+    
+                       <div class="col-3">
+                        <div class="row">
+                            <div class="col-12 form-check form-check-solid mt-5">
+                                <label class="fs-6 fw-bold">
+                                    <input class="form-check-input" type="radio" name="user_amigo" [checked]="user_amigo == 1" (click)="userAmigo(1)"/>  
+                                    Email
+                                </label>
+                            </div>
+                            
+                            <div class="col-12 form-check form-check-solid mt-3">
+                                <label class="fs-6 fw-bold">
+                                    <input class="form-check-input" type="radio" name="user_amigo" [checked]="user_amigo == 2" (click)="userAmigo(2)"/>  
+                                    Id
+                                </label>
+                            </div>
+                        </div>
+                       </div>
+                    </div>
+                    
+                    <div class="row mb-8 mt-5">
+                        <div class="col-3">
+                            1 = Armonías <br>
+                            2 = Cuerdas <br>
+                            3 = Metales <br>
+                            4 = Bajo <br>
+                        </div>
+                        <div class="col-9">
+                            <label class="fs-6 fw-bold mt-1 mb-1">Instrumento (número): </label>
+                            <input type="text" class="form-control form-control-solid" name="instrumento_amigo" [(ngModel)]="instrumento_amigo" placeholder="1">
+                       </div>
+                    </div>
+                       
+                    <div class="row mb-5">
+                        <div class="col-6 d-grid gap-2">
+                            <button type="button" (click)="AddToMAmigo()" class="btn btn-info" data-kt-users-modal-action="submit">Añadir</button>
+                        </div>
+                        <div class="col-6 d-grid gap-2">
+                            <button type="button" (click)="RemoveFromMAmigo()" class="btn btn-danger" data-kt-users-modal-action="submit">Eliminar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

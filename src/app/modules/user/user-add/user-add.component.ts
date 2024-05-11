@@ -21,12 +21,18 @@ export class UserAddComponent implements OnInit {
   image_preview:any = "./assets/media/avatars/300-6.jpg";
   file_avatar:any = null;
 
+  roles:any = [];
+  role_id:any = null;
+
   isLoading:any;
   constructor(public userService: UserService, public toaster:Toaster,
     public modal: NgbActiveModal) { }
 
   ngOnInit(): void {
     this.isLoading = this.userService.isLoading$;
+    this.userService.roles().subscribe((resp:any) => {
+      this.roles = resp;
+    })
   }
   
   processAvatar($event:any){
@@ -55,7 +61,7 @@ export class UserAddComponent implements OnInit {
     formData.append("surname", this.surname);
     formData.append("email", this.email);
     formData.append("password", this.password);
-    formData.append("role_id", "1");
+    formData.append("role_id", this.role_id);
     formData.append("type_user", "2");
     formData.append("imagen", this.file_avatar);
 

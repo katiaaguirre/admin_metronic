@@ -17,7 +17,7 @@ import { FakeAPIService } from './_fake/fake-api.service';
 import { CKEditorModule } from 'ckeditor4-angular';
 
 import { ToastNotificationsModule } from 'ngx-toast-notifications';
-
+import { RepertorioComponent } from './modules/repertorio/repertorio.component';
 function appInitializer(authService: AuthService) {
   return () => {
     return new Promise((resolve) => {
@@ -28,7 +28,7 @@ function appInitializer(authService: AuthService) {
 }
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, RepertorioComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
